@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Templify — Digital Tools for Smarter Students</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="font-sans antialiased text-gray-800 bg-white">
+  <header class="fixed top-0 w-full bg-white z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 flex items-center justify-between h-20"> <!-- Ubah h-16 ke h-24 -->
+      
+      <!-- Logo di kiri -->
+      <a href="/index.html" class="text-4xl font-bold text-[#2563EB]">Templify</a> <!-- Ubah text-2xl ke text-4xl -->
+
+      <!-- Navigasi + Cart + Hamburger di kanan -->
+      <div class="flex items-center gap-9"> <!-- Ubah gap-9 ke gap-12 -->
+        <!-- Navigasi -->
+        <nav class="hidden md:flex gap-1 text-lg font-medium"> <!-- Ubah gap-6 ke gap-10, text-sm ke text-lg, font-medium ke font-semibold -->
+          <a href="/index.html" class="nav-link py-2 px-4">Home</a>
+          <a href="/pages/products.html" class="nav-link py-2 px-4">Products</a>
+          <a href="#bundles" class="nav-link py-2 px-4">Bundles</a>
+          <a href="#about" class="nav-link py-2 px-4">About</a>
+          <a href="#contact" class="nav-link py-2 px-4">Contact</a>
+        </nav>
+
+        <!-- Tombol Cart -->
+        <button id="cartBtn" class="hidden md:inline-flex items-center justify-center px-4 py-3 rounded-lg bg-[#2563EB] text-white shadow text-lg hover:scale-105 transition" title="View Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h15l-1.5 9h-13z" />
+            <circle cx="9" cy="20" r="1" />
+            <circle cx="18" cy="20" r="1" />
+          </svg>
+          <span id="cartCount" class="ml-2">0</span>
+        </button>
+
+        <!-- Hamburger untuk mobile -->
+        <button id="hamburger" class="md:hidden p-3 rounded-md text-[#2563EB]">
+          <svg id="hambIcon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+    
+<!-- Mobile menu -->
+<div id="mobileMenu" class="md:hidden hidden bg-white border-t">
+  <div class="px-4 py-3 flex flex-col gap-6">
+    <a href="#home" class="py-2 nav-link-mobile">Home</a>
+        <a href="#products" class="py-2 nav-link-mobile">Products</a>
+        <a href="#bundles" class="py-2 nav-link-mobile">Bundles</a>
+        <a href="#about" class="py-2 nav-link-mobile">About</a>
+        <a href="#contact" class="py-2 nav-link-mobile">Contact</a>
+        <button id="mobileCart" class="mt-2 px-4 py-2 rounded-lg bg-[#2563EB] text-white">Cart (<span id="mobileCartCount">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <!-- Products -->
+    <section id="products" class="py-16 px-4 md:px-8 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Our Products</h2>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- product cards rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact" class="py-16 px-4 md:px-8 bg-gray-50">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Stay in the loop</h2>
+        <p class="text-gray-600 mb-6">Subscribe for new releases and occasional discounts.</p>
+        <form id="subscribeForm" class="flex flex-col sm:flex-row gap-3 justify-center">
+          <input id="emailInput" type="email" placeholder="Your email" class="w-full sm:w-auto px-4 py-3 rounded-lg border" required />
+          <button class="px-5 py-3 rounded-lg bg-[#2563EB] text-white shadow hover:scale-105 transition">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg max-w-lg w-full p-6 shadow-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold">Your Cart</h3>
+        <button id="closeCart" class="text-gray-500 hover:text-gray-800">&times;</button>
+      </div>
+      <div id="cartItems" class="space-y-3 max-h-60 overflow-auto mb-4">
+        <!-- JS populated -->
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="text-sm text-gray-700">Total: <span id="cartTotal">Rp0</span></div>
+        <div class="flex gap-2">
+          <button id="clearCart" class="px-4 py-2 rounded-lg border">Clear</button>
+          <button id="checkoutBtn" class="px-4 py-2 rounded-lg bg-[#2563EB] text-white">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 mt-12">
+  <div class="max-w-6xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Brand & Description -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-2">Templify</h2>
+      <p class="text-sm leading-relaxed">
+        Empowering learners with digital tools and resources for a smarter future.
+      </p>
+    </div>
+
+    <!-- Navigation Links -->
+    <div>
+      <h3 class="text-lg font-semibold text-white mb-3">Explore</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/index.html" class="hover:text-[#FACC15]">Home</a></li>
+        <li><a href="/pages/products.html" class="hover:text-[#FACC15]">Products</a></li>
+        <li><a href="#bundles" class="hover:text-[#FACC15]">Bundles</a></li>
+        <li><a href="#about" class="hover:text-[#FACC15]">About</a></li>
+        <li><a href="#contact" class="hover:text-[#FACC15]">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div>
+      <h3 class="text-lg font-semibold text-white mb-3">Newsletter</h3>
+      <p class="text-sm mb-2">Stay updated with our latest news and offers.</p>
+      <form class="flex flex-col gap-2">
+        <input type="email" placeholder="Your email" class="px-3 py-2 rounded bg-gray-800 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15]" />
+        <button type="submit" class="px-3 py-2 rounded bg-[#2563EB] text-white text-sm hover:bg-[#1E40AF] transition">Subscribe</button>
+      </form>
+    </div>
+
+    <!-- Social Media -->
+    <div>
+      <h3 class="text-lg font-semibold text-white mb-3">Follow Us</h3>
+      <div class="flex gap-4 text-xl">
+        <a href="#" class="hover:text-[#FACC15]"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-[#FACC15]"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-[#FACC15]"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="hover:text-[#FACC15]"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-gray-700 mt-8 pt-4 text-sm text-center text-gray-400">
+    <div class="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto px-4 md:px-8">
+      <div>&copy; 2025 Templify. All rights reserved.</div>
+      <div class="flex gap-4 mt-2 md:mt-0">
+        <a href="#" class="hover:text-[#FACC15]">Privacy Policy</a>
+        <a href="#" class="hover:text-[#FACC15]">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script src="/dummy backend.js"></script>
+</body>
+</html>

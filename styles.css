@@ -1,0 +1,63 @@
+
+/* Local styles and simple animations */
+body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+
+.nav-link, .nav-link-mobile {
+  color: #374151;
+  transition: color .2s;;
+  align-items: center;
+}
+.nav-link:hover { color: #2563EB; }
+.nav-link-mobile { padding: .5rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+
+.fade-in { animation: fadeIn .9s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+
+/* slow pulse for bundle highlight */
+@keyframes pulseSlow { 0% { box-shadow: 0 6px 20px rgba(250,201,21,0.22);} 50% { box-shadow: 0 10px 28px rgba(250,201,21,0.28);} 100% { box-shadow: 0 6px 20px rgba(250,201,21,0.22);} }
+.animate-pulse-slow { animation: pulseSlow 2.8s infinite; }
+
+/* product card hover */
+.product-card { transition: transform .25s ease, box-shadow .25s ease; }
+.product-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 12px 30px rgba(37,99,235,0.12); }
+
+/* Add button hover effect */
+.addBtn {
+  background-color: #2563EB;
+  transition: background-color 0.2s;
+}
+.addBtn:hover {
+  background-color: #1e40af; /* Biru lebih gelap */
+}
+
+/* Browse All button style */
+.browse-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  min-width: 0;
+  max-width: 220px;
+  background: linear-gradient(90deg, #2563EB 60%, #1e40af 100%);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+  white-space: nowrap;
+}
+.browse-all-btn:hover {
+  background: linear-gradient(90deg, #1e40af 60%, #2563EB 100%);
+  transform: translateY(-2px) scale(1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* cart modal visible state */
+#cartModal.show { display:flex; }
+
+@media (min-width: 768px) {
+  #mobileMenu { display:none !important; }
+}
